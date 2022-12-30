@@ -1,9 +1,16 @@
 import React from 'react';
 import MyParagraph from "./MyParagraph";
 
+import $ from 'jquery';
+
+$('p').on('click', () => {
+  alert('clicked');
+})
+
 function DemoOutput(props) {
   console.log('DemoOutput RUNNING');
   const newTest = props.show.sort((a, b) => a - b);
+
 
 
   return (
