@@ -16,6 +16,7 @@ function App() {
 
   return (
     <div className="app">
+      <h1 className="animate__backInUp">An animated element</h1>
       <h1>Hi there!</h1>
       <DemoOutput show={test} />
       <Button onClick={toggleParagraphHandler}>Toggle Paragraph</Button>
