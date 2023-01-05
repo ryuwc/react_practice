@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Spline from '@splinetool/react-spline';
 
 import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
 import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
@@ -36,20 +37,21 @@ const App = () => {
   }
 
   return (
-    <div>
-      <section id="goal-form">
-        <CourseInput onAddGoal={addGoalHandler} />
-      </section>
-      <section id="goals">
-        {content}
-        {/* {courseGoals.length > 0 && (
-          <CourseGoalList
-            items={courseGoals}
-            onDeleteItem={deleteItemHandler}
-          />
-        ) // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
-        } */}
-      </section>
+    <div style={{width: '100%', height: '100%'}}>
+      {/*<section id="goal-form">*/}
+      {/*  <CourseInput onAddGoal={addGoalHandler} />*/}
+      {/*</section>*/}
+      {/*<section id="goals">*/}
+      {/*  {content}*/}
+      {/*  /!* {courseGoals.length > 0 && (*/}
+      {/*    <CourseGoalList*/}
+      {/*      items={courseGoals}*/}
+      {/*      onDeleteItem={deleteItemHandler}*/}
+      {/*    />*/}
+      {/*  ) // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>*/}
+      {/*  } *!/*/}
+      {/*</section>*/}
+      <Spline width="100vh" height="100vh" scene="https://prod.spline.design/k-qdnCnZigklPhZc/scene.splinecode" />
     </div>
   );
 };
