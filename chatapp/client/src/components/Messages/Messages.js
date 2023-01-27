@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
+import BasicScrollToBottom from "react-scroll-to-bottom";
+import Message from "./Message/Message";
 
 import './Messages.css';
 
-function Messages(props) {
+function Messages({ messages, name }) {
+  useEffect(() => {
+    console.log(messages);
+  }, [messages]);
+
   return (
-    <div>
-      메세지들
-    </div>
+    <BasicScrollToBottom className="messages">
+      {messages.map((message, i) => {
+        return <div key={i}><Message message={message} name={name} /></div>
+      })}
+    </BasicScrollToBottom>
   );
 }
 
