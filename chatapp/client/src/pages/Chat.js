@@ -20,8 +20,16 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
+
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search)
+    // 여기선 name과 room을 url에서 가져온다.
+    // 이유는 setRoom과 setName이 적용되기 전에 socket.emit('join')이 실행되기 때문이다.
+    // url에서 가져오는 방법이 아닌 다른 방법으로 name과 room을 가져오려면
+    // 미리 정해진 방법으로 name과 room을 가져오는 것이 아닌
+    // socket.emit('join')이 실행되기 전에 setRoom과 setName이 실행되도록 해야 한다.
+    const { name, room } = queryString.parse(window.location.search)
+
+    console.log(name, room)
 
     socket = io(ENDPOINT)
 
@@ -49,6 +57,7 @@ const Chat = ({ location }) => {
     event.preventDefault()
 
     if (message) {
+      // console.log(message)
       socket.emit('sendMessage', message, () => setMessage(''))
     }
   }
@@ -58,11 +67,7 @@ const Chat = ({ location }) => {
       <div className='container'>
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />
-        <Input
-          message={message}
-          setMessage={setMessage}
-          sendMessage={sendMessage}
-        />
+        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
       <TextContainer users={users} />
     </div>

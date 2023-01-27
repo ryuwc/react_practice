@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import './Message.css';
 
@@ -29,6 +29,15 @@ function Message({ message: { user, text }, name }) {
       <p className='sentText pl-10 '>{user}</p>
     </div>
   )
+
+  // 메세지에서 채팅방에 태그를 넣을 수 있음
+  // const textTag = <button>안녕</button>
+  //
+  // return (
+  //   <div>
+  //     {textTag}
+  //   </div>
+  // )
 }
 
 export default Message;
