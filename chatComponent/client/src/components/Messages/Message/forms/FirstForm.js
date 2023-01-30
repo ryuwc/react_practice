@@ -1,8 +1,9 @@
 import React from 'react';
 
 import './FirstForm.css';
+import {secondDeliveryFormSendMessage} from "../../../../util/chat";
 
-function FirstForm({secondDeliveryFormSendMessage}) {
+function FirstForm({isSentByCurrentUser}) {
 
   return (
     <form className="firstForm">

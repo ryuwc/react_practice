@@ -12,8 +12,27 @@ export const socketJoin = (name, room) => {
   })
 }
 
-export const textCode = (event) => {
+export const sendMessage = (event, message, setMessage) => {
   event.preventDefault()
-  // console.log('btnSendMessage')
+  if (message) {
+    socket.emit('sendMessage', message, () => {})
+  }
+  setMessage('')
+}
+
+export const listenMessage = (setMessages) => {
+  socket.on('message', (message) => {
+    console.log(message)
+    setMessages((messages) => [...messages, message])
+  })
+}
+
+export const firstFormSendMessage = (event) => {
+  event.preventDefault()
   socket.emit('sendMessage', 'firstForm', () => {})
+}
+
+export const secondDeliveryFormSendMessage = (event) => {
+  event.preventDefault()
+  socket.emit('sendMessage', 'secondDeliveryForm', () => {})
 }

@@ -1,72 +1,42 @@
-import React, { useState, useEffect } from "react";
-import queryString from 'query-string';
-import io from "socket.io-client";
+import React from "react";
+import "./Message.css";
+import FirstForm from "./forms/FirstForm";
+import SecondDeliveryForm from "./forms/SecondDeliveryForm";
+import { useRecoilValue } from "recoil";
+import { nameState } from "../../../state/atom";
 
-import TextContainer from '../TextContainer/TextContainer';
-import Messages from '../Messages/Messages';
-import InfoBar from '../InfoBar/InfoBar';
-import Input from '../Input/Input';
-
-import './Chat.css';
-
-const ENDPOINT = 'https://project-chat-application.herokuapp.com/';
-
-let socket;
-
-const Chat = ({ location }) => {
-  const [name, setName] = useState('');
-  const [room, setRoom] = useState('');
-  const [users, setUsers] = useState('');
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
-
-    socket = io(ENDPOINT);
-
-    setRoom(room);
-    setName(name)
-
-    socket.emit('join', { name, room }, (error) => {
-      if(error) {
-        alert(error);
-      }
-    });
-  }, [ENDPOINT, location.search]);
-
-  useEffect(() => {
-    socket.on('message', message => {
-      setMessages(messages => [ ...messages, message ]);
-    });
-
-    socket.on("roomData", ({ users }) => {
-      setUsers(users);
-    });
-  }, []);
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-    if(message) {
-      console.log(message)
-      if (message === 'form') {
-        socket.emit('sendMessage', 'form', () => setMessage(''));
-      }
-      socket.emit('sendMessage', message, () => setMessage(''));
-    }
-  }
+function Message({ message: { user, text, type }}) {
+  const name = useRecoilValue(nameState);
+  const isSentByCurrentUser = user.trim().toLowerCase() === name.trim().toLowerCase();
+  const date = new Date();
+  const time = `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
 
   return (
-    <div className="outerContainer">
-      <div className="container">
-        <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-
-        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
-      </div>
-      <TextContainer users={users}/>
+    <div>
+      {isSentByCurrentUser && type === 'message' && (
+        <div className="messageContainer justifyEnd">
+          <div className="textTime">
+            <div className="messageBox backgroundBlue">
+              <p className="messageText colorWhite">{text}</p>
+            </div>
+            <p>{time}</p>
+          </div>
+        </div>
+      )}
+      {!isSentByCurrentUser && type === 'message' && (
+        <div className="messageContainer justifyStart">
+          <div className="textTime">
+            <div className="messageBox backgroundLight">
+              <p className="messageText colorDark">{text}</p>
+            </div>
+            <p>{time}</p>
+          </div>
+        </div>
+      )}
+      {type === 'firstForm' && <FirstForm isSentByCurrentUser={isSentByCurrentUser} />}
+      {type === 'secondDeliveryForm' && <SecondDeliveryForm />}
     </div>
-  );
+  )
 }
 
-export default Chat;
+export default Message;

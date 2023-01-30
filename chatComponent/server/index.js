@@ -16,6 +16,7 @@ app.use(router)
 io.on('connection', (socket) => {
   console.log('새로운 유저가 접속했습니다.')
   socket.on('join', ({name, room}, callback) => {
+    console.log(socket.id, name, room)
     const { error, user } = addUser({ id: socket.id, name, room })
     if (error) callback({error : '에러가 발생했습니다.'})
 
@@ -33,8 +34,10 @@ io.on('connection', (socket) => {
     })
     socket.join(user.room)
     callback()
+    return socket.id
   })
   socket.on('sendMessage', (message, callback) => {
+    console.log('확인용id', socket.id)
     const user = getUser(socket.id)
     // console.log(user)
     // console.log(typeof message, message)

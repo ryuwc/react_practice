@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 
 import './Messages.css';
 
-function Messages({ messages, name, secondDeliveryFormSendMessage }) {
+function Messages({ messages}) {
   useEffect(() => {
     console.log(messages);
   }, [messages]);
@@ -13,7 +13,7 @@ function Messages({ messages, name, secondDeliveryFormSendMessage }) {
   return (
     <BasicScrollToBottom className="messages">
       {messages.map((message, i) => {
-        return <div key={i}><Message message={message} name={name} secondDeliveryFormSendMessage={secondDeliveryFormSendMessage}/></div>
+        return <div key={i}><Message message={message}/></div>
       })}
     </BasicScrollToBottom>
   );

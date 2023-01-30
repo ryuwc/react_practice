@@ -1,25 +1,15 @@
 import React from "react";
-
 import "./Message.css";
 import FirstForm from "./forms/FirstForm";
+import SecondDeliveryForm from "./forms/SecondDeliveryForm";
+import { useRecoilValue } from "recoil";
+import { nameState } from "../../../state/atom";
 
-function Message({ message: { user, text, type }, name, secondDeliveryFormSendMessage }) {
-  let isSentByCurrentUser = false;
-
-  const trimmedName = name.trim().toLowerCase();
-
-  if (user === trimmedName) {
-    isSentByCurrentUser = true;
-  }
-  console.log(isSentByCurrentUser);
-
-  // 현재 시간 hh:mm
+function Message({ message: { user, text, type }}) {
+  const name = useRecoilValue(nameState)
+  const isSentByCurrentUser = user.trim().toLowerCase() === name.trim().toLowerCase();
   const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const time = `${hours < 10 ? `0${hours}` : hours}:${
-    minutes < 10 ? `0${minutes}` : minutes
-  }`;
+  const time = `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
 
   return (
     <div>
@@ -43,21 +33,12 @@ function Message({ message: { user, text, type }, name, secondDeliveryFormSendMe
           </div>
         </div>
       )}
-      {isSentByCurrentUser && type === 'firstForm' && <FirstForm secondDeliveryFormSendMessage={secondDeliveryFormSendMessage} />}
-      {!isSentByCurrentUser && type === 'firstForm' && <FirstForm secondDeliveryFormSendMessage={secondDeliveryFormSendMessage} />}
-      {isSentByCurrentUser && type === 'secondDeliveryForm' && <input type="text" />}
-      {!isSentByCurrentUser && type === 'secondDeliveryForm' && <input type="text"/>}
+      {isSentByCurrentUser && type === 'firstForm' && <FirstForm isSentByCurrentUser={isSentByCurrentUser}/>}
+      {!isSentByCurrentUser && type === 'firstForm' && <FirstForm isSentByCurrentUser={isSentByCurrentUser}/>}
+      {isSentByCurrentUser && type === 'secondDeliveryForm' && <SecondDeliveryForm />}
+      {!isSentByCurrentUser && type === 'secondDeliveryForm' && <SecondDeliveryForm />}
     </div>
   )
-
-  // 메세지에서 채팅방에 태그를 넣을 수 있음
-  // const textTag = <button>안녕</button>
-  //
-  // return (
-  //   <div>
-  //     {textTag}
-  //   </div>
-  // )
 }
 
 export default Message;
