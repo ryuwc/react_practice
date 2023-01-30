@@ -2,25 +2,24 @@ import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
 import io from 'socket.io-client'
 
-import InfoBar from "../components/InfoBar/InfoBar";
-import Input from "../components/Input/Input";
-import Messages from "../components/Messages/Messages";
+import Input from "../Input/Input";
+import Messages from "../Messages/Messages";
 
 import './Chat.css'
-import TextContainer from "../components/TextContainer/TextContainer";
 
 import {useRecoilState} from "recoil";
-import {nameState} from "../state/atom";
+import {nameState, roomState} from "../../state/atom";
+import {socketJoin} from "../../util/chat";
 
 const ENDPOINT = 'http://localhost:5000'
 
-let socket
+let socket;
 
 const Chat = ({ location }) => {
   // const [name, setName] = useState('')
   const [name, setName] = useRecoilState(nameState)
-  const [room, setRoom] = useState('')
-  const [users, setUsers] = useState('')
+  const [room, setRoom] = useRecoilState(roomState)
+  // const [users, setUsers] = useState('')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
@@ -30,20 +29,12 @@ const Chat = ({ location }) => {
     // url에서 가져오는 방법이 아닌 다른 방법으로 name과 room을 가져오려면
     // 미리 정해진 방법으로 name과 room을 가져오는 것이 아닌
     // socket.emit('join')이 실행되기 전에 setRoom과 setName이 실행되도록 해야 한다.
-    const { room } = queryString.parse(window.location.search)
 
     socket = io(ENDPOINT)
 
-    setRoom(room)
-    setName(name)
+    // console.log(name, room)
 
-    console.log(name, room)
-
-    socket.emit('join', { name, room }, (error) => {
-      if (error) {
-        alert(error)
-      }
-    })
+    socketJoin(name, room)
   }, [ENDPOINT, window.location.search])
 
   useEffect(() => {
@@ -52,34 +43,37 @@ const Chat = ({ location }) => {
       setMessages((messages) => [...messages, message])
     })
 
-    socket.on('roomData', ({ users }) => {
-      setUsers(users)
-    })
+    // socket.on('roomData', ({ users }) => {
+    //   setUsers(users)
+    // })
   }, [])
 
   const sendMessage = (event) => {
     event.preventDefault()
 
-    console.log('chat.js', message)
-    if (message === 'form') {
-      socket.emit('sendMessage', 'form', () => setMessage(''))
-    } else if (message) {
+    // console.log('chat.js', message)
+    if (message) {
       socket.emit('sendMessage', message, () => setMessage(''))
     }
   }
 
-  const btnSendMessage = (event) => {
+  const firstFormSendMessage = (event) => {
     event.preventDefault()
-    console.log('btnSendMessage')
-    socket.emit('sendMessage', 'form', () => setMessage(''))
+    // console.log('btnSendMessage')
+    socket.emit('sendMessage', 'firstForm', () => {})
+  }
+
+  const secondDeliveryFormSendMessage = (event) => {
+    event.preventDefault()
+    console.log('두번째 배달')
+    socket.emit('sendMessage', 'secondDeliveryForm', () => {})
   }
 
   return (
     <div className='outerContainer'>
       <div className='container'>
-        <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} btnSendMessage={btnSendMessage} />
+        <Messages messages={messages} name={name} secondDeliveryFormSendMessage={secondDeliveryFormSendMessage}/>
+        <Input sendMessage={sendMessage} firstFormSendMessage={firstFormSendMessage} />
       </div>
       {/*<TextContainer users={users} />*/}
     </div>

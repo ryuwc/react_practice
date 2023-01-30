@@ -1,12 +1,14 @@
 import React from 'react';
 
 import './Input.css';
-import {useRecoilState, useRecoilValue} from "recoil";
-import {nameState} from "../../state/atom";
+import {useRecoilState} from "recoil";
+import {nameState, messageState} from "../../state/atom";
+import {textCode} from "../../util/chat";
 
-function Input ({ setMessage, sendMessage, message, btnSendMessage }) {
+function Input ({ sendMessage, firstFormSendMessage }) {
   // const name = useRecoilValue(nameState)
-  const name = useRecoilValue(nameState)
+  const [message, setMessage] = useRecoilState(messageState)
+  const [name, setName] = useRecoilState(nameState)
 
   const isOwner = name === '사장';
   
@@ -19,7 +21,8 @@ function Input ({ setMessage, sendMessage, message, btnSendMessage }) {
         value={message}
         onChange={({ target: { value } }) => setMessage(value)}
       />
-      {isOwner && <button onClick={e => btnSendMessage(e)}>첨부</button>}
+      {isOwner && <button onClick={e => textCode(e)}>첨부</button>}
+      {/*{isOwner && <button onClick={e => firstFormSendMessage(e)}>첨부</button>}*/}
       <button className="sendButton" onClick={e => sendMessage(e)}>전송</button>
     </form>
   )

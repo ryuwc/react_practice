@@ -40,11 +40,14 @@ io.on('connection', (socket) => {
     // console.log(typeof message, message)
     console.log(message)
     let type;
-    if (message === 'form') {
-      type = 'form'
+    if (message === 'firstForm') {
+      type = 'firstForm'
+    } else if (message === 'secondDeliveryForm') {
+      type = 'secondDeliveryForm'
     } else {
       type = 'message'
     }
+
     io.to(user.room).emit('message', {
       user: user.name,
       text: message,

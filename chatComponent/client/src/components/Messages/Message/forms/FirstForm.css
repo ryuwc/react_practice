@@ -1,0 +1,12 @@
+.firstForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #2979FF;
+  max-width: 80%;
+}
+
+.btn {
+  border: 1px solid rebeccapurple;
+  width: 200px;
+}
