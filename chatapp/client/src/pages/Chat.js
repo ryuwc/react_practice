@@ -9,17 +9,21 @@ import Messages from "../components/Messages/Messages";
 import './Chat.css'
 import TextContainer from "../components/TextContainer/TextContainer";
 
+import {useRecoilState} from "recoil";
+import nameState from "../state/atom";
+
+
 const ENDPOINT = 'http://localhost:5000'
 
 let socket
 
 const Chat = ({ location }) => {
-  const [name, setName] = useState('')
+  // const [name, setName] = useState('')
+  const [name, setName] = useRecoilState(nameState)
   const [room, setRoom] = useState('')
   const [users, setUsers] = useState('')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
-
 
   useEffect(() => {
     // 여기선 name과 room을 url에서 가져온다.
@@ -27,14 +31,15 @@ const Chat = ({ location }) => {
     // url에서 가져오는 방법이 아닌 다른 방법으로 name과 room을 가져오려면
     // 미리 정해진 방법으로 name과 room을 가져오는 것이 아닌
     // socket.emit('join')이 실행되기 전에 setRoom과 setName이 실행되도록 해야 한다.
-    const { name, room } = queryString.parse(window.location.search)
+    const { room } = queryString.parse(window.location.search)
+
+    socket = io(ENDPOINT)
+    
+    setRoom(room)
+    setName(name)
 
     console.log(name, room)
 
-    socket = io(ENDPOINT)
-
-    setRoom(room)
-    setName(name)
 
     socket.emit('join', { name, room }, (error) => {
       if (error) {

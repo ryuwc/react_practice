@@ -2,9 +2,14 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 
 import './Join.css';
+import {useRecoilState} from "recoil";
+import nameState from "../state/atom";
+
+
 
 function Join() {
-  const [name, setName] = useState('')
+  // const [name, setName] = useState('')
+  const [name, setName] = useRecoilState(nameState)
   const [room, setRoom] = useState('')
   return (
     <div className='joinOuterContainer'>
