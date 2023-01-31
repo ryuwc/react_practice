@@ -2,8 +2,10 @@ import React from "react";
 import "./Message.css";
 import FirstForm from "./forms/FirstForm";
 import SecondDeliveryForm from "./forms/SecondDeliveryForm";
+import SecondPickUpForm from "./forms/SecondPickUpForm";
 import { useRecoilValue } from "recoil";
 import { nameState } from "../../../state/atom";
+import ThirdPickUpForm from "./forms/ThirdPickUpForm";
 
 function Message({ message: { user, text, type }}) {
   const name = useRecoilValue(nameState)
@@ -37,6 +39,10 @@ function Message({ message: { user, text, type }}) {
       {!isSentByCurrentUser && type === 'firstForm' && <FirstForm isSentByCurrentUser={isSentByCurrentUser}/>}
       {isSentByCurrentUser && type === 'secondDeliveryForm' && <SecondDeliveryForm />}
       {!isSentByCurrentUser && type === 'secondDeliveryForm' && <SecondDeliveryForm />}
+      {isSentByCurrentUser && type === 'secondPickUpForm' && <SecondPickUpForm />}
+      {!isSentByCurrentUser && type === 'secondPickUpForm' && <SecondPickUpForm />}
+      {isSentByCurrentUser && type === 'thirdPickUpForm' && <ThirdPickUpForm />}
+      {!isSentByCurrentUser && type === 'thirdPickUpForm' && <ThirdPickUpForm />}
     </div>
   )
 }

@@ -47,6 +47,10 @@ io.on('connection', (socket) => {
       type = 'firstForm'
     } else if (message === 'secondDeliveryForm') {
       type = 'secondDeliveryForm'
+    } else if (message === 'secondPickUpForm') {
+      type = 'secondPickUpForm'
+    } else if (message === 'thirdPickUpForm') {
+      type = 'thirdPickUpForm'
     } else {
       type = 'message'
     }

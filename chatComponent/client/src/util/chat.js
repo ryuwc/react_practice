@@ -36,3 +36,13 @@ export const secondDeliveryFormSendMessage = (event) => {
   event.preventDefault()
   socket.emit('sendMessage', 'secondDeliveryForm', () => {})
 }
+
+export const secondPickUpFormSendMessage = (event) => {
+  event.preventDefault()
+  socket.emit('sendMessage', 'secondPickUpForm', () => {})
+}
+
+export const ThirdPickUpFormSendMessage = (event) => {
+  event.preventDefault()
+  socket.emit('sendMessage', 'thirdPickUpForm', () => {})
+}
