@@ -19,7 +19,7 @@ export const FirstFormTitle = styled.p`
   margin: 16px 0 24px 0;
 `;
 
-export const DeliveryFormButton = styled.button`
+export const FormButton = styled.button`
   width: 168px;
   height: 44px;
   background: #FFEAF5;  
@@ -28,6 +28,7 @@ export const DeliveryFormButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 export const DeliveryFormButtonImage = styled.img`
@@ -38,5 +39,4 @@ export const DeliveryFormButtonImage = styled.img`
 export const DeliveryFormContent = styled.p`
   font-size: 16px;
   color: #000000;
-  margin: 0;
 `;

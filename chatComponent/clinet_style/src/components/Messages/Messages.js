@@ -8,6 +8,10 @@ function Messages({ messages}) {
     console.log(messages);
   }, [messages]);
 
+  // useEffect(() => {
+  //   const
+  // }, [messages]);
+
   return (
     <ChatList>
       {messages.map((message, i) => {
