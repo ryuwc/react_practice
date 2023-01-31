@@ -51,6 +51,8 @@ io.on('connection', (socket) => {
       type = 'secondPickUpForm'
     } else if (message === 'thirdPickUpForm') {
       type = 'thirdPickUpForm'
+    } else if (message === 'thirdDeliveryForm') {
+      type = 'thirdDeliveryForm'
     } else {
       type = 'message'
     }
