@@ -10,14 +10,4 @@ export const roomState = atom({
   default: '',
 });
 
-export const messageState = atom({
-  key: 'messageState',
-  default: '',
-});
-
-export const isFormActiveState = atom({
-  key: 'isFormActiveState',
-  default: false,
-});
-
 

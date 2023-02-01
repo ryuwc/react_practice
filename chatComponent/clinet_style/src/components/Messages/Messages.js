@@ -8,15 +8,10 @@ function Messages({ messages}) {
     console.log(messages);
   }, [messages]);
 
-  // useEffect(() => {
-  //   const
-  // }, [messages]);
-
   return (
     <ChatList>
       {messages.map((message, i) => {
-        const time = `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`
-        return <div key={i}><Message time={time} message={message}/></div>
+        return <div key={i}><Message message={message}/></div>
       })}
     </ChatList>
   );

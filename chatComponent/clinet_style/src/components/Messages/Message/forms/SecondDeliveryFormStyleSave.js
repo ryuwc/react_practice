@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import {MyMessageTime} from "../messageStyle";
 
 export const FormWrapper = styled.div`
   background: #ffffff;
   margin-left: 16px;
-  margin-bottom: 0;
+  margin-bottom: 16px;
   border-radius: 10px;
   width: 232px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
@@ -45,13 +44,6 @@ export const TextInput = styled.input`
     border-bottom: ${props => props.HasError ? '1px solid red' : '1px solid black'};
     
   }
-  // 보여주기만 하는 상황
-  &:disabled {
-    border: none;
-    background: #FFFFFF;
-    color: black;
-    margin-bottom: 16px;
-  }
 `;
 
 export const InputCounter = styled.p`
@@ -82,11 +74,6 @@ export const GiftMessageInput = styled.textarea`
   &:focus {
     outline: none;
   }
-  &:disabled {
-    background: #FFFFFF;
-    color: black;
-    margin-bottom: 16px;
-  }
 `;
 
 export const SubmitPaymentButton = styled.button`
@@ -110,23 +97,4 @@ export const ErrorMessage = styled.p`
   color: red;
   font-size: 11px;
   margin: 0 0 8px 0;
-`;
-
-export const FormFooter = styled.div`
-  background: #FFEAF5;
-  padding: 16px;
-`;
-
-export const FormFooterMessageContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const FormFooterMessage = styled.p`
-  color: black;
-  margin: 0;
-`;
-
-export const FormTime = styled(MyMessageTime)`
-  margin: 4px auto 13px 16px;
 `;

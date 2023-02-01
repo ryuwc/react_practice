@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import {MyMessageTime} from "../messageStyle";
 
-export const FirstFormLayout = styled.div`
+export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   width: 232px;
   height: 222px;
   background: #ffffff;
@@ -14,12 +15,12 @@ export const FirstFormLayout = styled.div`
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 `;
 
-export const FirstFormTitle = styled.p`
+export const FormTitle = styled.p`
   font-size: 19px;
   margin: 16px 0 24px 0;
 `;
 
-export const FormButton = styled.button`
+export const SubmitButton = styled.button`
   width: 168px;
   height: 44px;
   background: #FFEAF5;  
@@ -31,12 +32,16 @@ export const FormButton = styled.button`
   margin-bottom: 16px;
 `;
 
-export const DeliveryFormButtonImage = styled.img`
+export const ButtonImage = styled.img`
   width: 19px;
   height: 19px;
 `;
 
-export const DeliveryFormContent = styled.p`
+export const FormText = styled.p`
   font-size: 16px;
   color: #000000;
+`;
+
+export const FormTime = styled(MyMessageTime)`
+  margin: 0 auto 13px 16px;
 `;

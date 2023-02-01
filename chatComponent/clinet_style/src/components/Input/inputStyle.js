@@ -15,7 +15,7 @@ export const InputText = styled.input`
   width: ${props => props.isOwner ? '275px' : '312px'} ;
   height: 40px;
   font-size: 16px;
-  margin: ${props => props.isOwner ? '0 8px 0 16px' : '0 16px'} ;
+  margin: ${props => props.isOwner ? '16px 8px 16px 16px' : '16px 16px'} ;
   padding-left: 16px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 `;

@@ -4,7 +4,7 @@ import BasicScrollToBottom from "react-scroll-to-bottom";
 
 export const ChatList = styled(BasicScrollToBottom)`
   padding: 16px 0 0 0;
-  overflow: auto;
+  overflow: scroll;
   flex: auto;
   &::-webkit-scrollbar {
     display: none;

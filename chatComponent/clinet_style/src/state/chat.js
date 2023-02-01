@@ -30,4 +30,14 @@ export const receiveUserPhoneState = atom({
   default: '',
 });
 
+export const receiveUserAddressState = atom({
+  key: 'receiveUserAddressState',
+  default: '',
+});
+
+export const paymentAmountState = atom({
+  key: 'paymentAmountState',
+  default: '',
+});
+
 

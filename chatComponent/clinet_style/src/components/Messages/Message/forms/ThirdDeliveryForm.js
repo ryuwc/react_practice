@@ -1,9 +1,7 @@
 import React from 'react';
 
-function ThirdDeliveryForm() {
+function ThirdDeliveryForm({time}) {
   const [sendUser, setSendUser] = useRecoilState(sendUserState);
-
-
 
   return (
     <form>

@@ -39,5 +39,5 @@ export const YourMessageContainer = styled(MyMessageContainer)`
 `;
 
 export const YourMessageTime = styled(MyMessageTime)`
-  margin: 8px auto 0 0;
+  margin: 0 auto 0 16px;
 `;

@@ -1,30 +1,33 @@
 import React from 'react';
-
 import deliveryButtonFormImage from './img/DeliveryButtonFormImage.png';
-
-import './FirstForm.css';
 import {secondDeliveryFormSendMessage, secondPickUpFormSendMessage} from "../../../../util/chat";
 import {
-  FormButton,
-  DeliveryFormButtonImage,
-  DeliveryFormContent,
-  FirstFormLayout,
-  FirstFormTitle
+  SubmitButton,
+  ButtonImage,
+  FormText,
+  FormContainer,
+  FormTitle, FormTime
 } from "./firstFormStyle";
+import {YourMessageTime} from "../messageStyle";
 
-function FirstForm({isSentByCurrentUser}) {
+function FirstForm({time}) {
 
   return (
-    <FirstFormLayout>
-      <FirstFormTitle>상품을 어떻게<br />보내시겠어요?</FirstFormTitle>
-      <FormButton className="btn" onClick={e => secondDeliveryFormSendMessage(e)}>
-        <DeliveryFormButtonImage src={deliveryButtonFormImage} alt="deliveryButtonFormImage"/>
-        <DeliveryFormContent>배달로 보낼게요</DeliveryFormContent>
-      </FormButton>
-      <FormButton className="btn" onClick={e => secondPickUpFormSendMessage(e)}>
-        포장
-      </FormButton>
-    </FirstFormLayout>
+    <>
+      <FormContainer>
+        <FormTitle>상품을 어떻게<br />보내시겠어요?</FormTitle>
+        <SubmitButton className="btn" onClick={e => secondDeliveryFormSendMessage(e)}>
+          <ButtonImage src={deliveryButtonFormImage} alt="deliveryButtonFormImage"/>
+          <FormText>배달로 보낼게요</FormText>
+        </SubmitButton>
+        <SubmitButton className="btn" onClick={e => secondPickUpFormSendMessage(e)}>
+          포장
+        </SubmitButton>
+      </FormContainer>
+      <FormTime>
+        {time}
+      </FormTime>
+    </>
   );
 }
 
