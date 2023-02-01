@@ -8,6 +8,8 @@ import {useRecoilValue} from "recoil";
 import {nameState, roomState} from "../../state/atom";
 import {listenMessage, socketJoin} from "../../util/chat";
 import {ChatLayout} from "./chatStyle";
+import ErrorModal from "../Messages/Message/forms/errorModal/ErrorModal";
+import {isErrorModalShowState} from "../../state/chat";
 
 const ENDPOINT = 'http://localhost:5000'
 
@@ -28,10 +30,13 @@ const Chat = () => {
     listenMessage(setMessages)
   }, [])
 
+  const isErrorModalShow = useRecoilValue(isErrorModalShowState)
+
   return (
     <ChatLayout>
       <Messages messages={messages}/>
       <Input message={message} setMessage={setMessage} />
+      {isErrorModalShow && <ErrorModal/>}
     </ChatLayout>
   )
 }

@@ -5,7 +5,7 @@ import {
   giftCardState, paymenAmountState, receiveUserAddressState,
   receiveUserPhoneState, receiveUserState, sendUserPhoneState, sendUserState
 } from "../../../../state/chat";
-import { ThirdDeliveryFormSendMessage } from "../../../../util/chat";
+import {ThirdDeliveryFormSendMessage} from "../../../../util/chat";
 import {
   ErrorMessage, FormContent, FormHeaderContainer, FormTime, FormWrapper, GiftMessageInput,
   InputCounter, InputCounterContainer, InputLabel, MarginBottom16TextInput,
@@ -86,8 +86,6 @@ function SecondDeliveryForm({time}) {
     toggleHasError: VpaymenAmountToggleHasError,
   } = useInputValidate(isNotEmpty);
 
-  const receiveUserAddressHasError = !isNotEmpty(receiveUserAddress);
-
   const ThirdDeliveryFormHandler = (e) => {
     const formData = [
       { key: 'sendUser', value: sendUser, toggleError: VsendUserToggleHasError },
@@ -97,18 +95,19 @@ function SecondDeliveryForm({time}) {
       { key: 'paymentAmount', value: paymentAmount, toggleError: VpaymenAmountToggleHasError }
     ];
 
-    for (const data of formData) {
-      alert('제대로 입력하세요.')
-      if (!isNotEmpty(data.value)) {
-        data.toggleError();
-        return;
-      }
-    }
+    // for (const data of formData) {
+    //   if (!isNotEmpty(data.value)) {
+    //     data.toggleError();
+    //     return;
+    //   }
+    // }
 
-    if (receiveUserAddressHasError) {
-      alert('주소를 입력해주세요.');
-      return;
-    }
+    // if (receiveUserAddressHasError) {
+    //   alert('주소를 입력해주세요.');
+    //   return;
+    // }
+
+    ThirdDeliveryFormSendMessage(e);
   };
 
   return (

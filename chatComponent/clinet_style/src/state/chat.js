@@ -1,4 +1,4 @@
-import {atom} from "recoil";
+import {atom, useRecoilState} from "recoil";
 
 export const sendUserState = atom({
   key: 'sendUserState',
@@ -38,6 +38,11 @@ export const receiveUserAddressState = atom({
 export const paymentAmountState = atom({
   key: 'paymentAmountState',
   default: '',
+});
+
+export const isErrorModalShowState = atom({
+  key: 'isErrorModalShowState',
+  default: false,
 });
 
 

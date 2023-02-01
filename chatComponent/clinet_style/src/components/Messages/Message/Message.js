@@ -13,6 +13,7 @@ import {
   MyMessageTime,
   YourMessageContainer, YourMessageTime
 } from "./messageStyle";
+import ThirdDeliveryForm from "./forms/ThirdDeliveryForm";
 
 function Message({ message: { user, text, type, time }}) {
   const name = useRecoilValue(nameState)
@@ -44,7 +45,7 @@ function Message({ message: { user, text, type, time }}) {
       {type === 'secondDeliveryForm' && <SecondDeliveryForm time={time}/>}
       {type === 'secondPickUpForm' && <SecondPickUpForm time={time}/>}
       {type === 'thirdPickUpForm' && <ThirdPickUpForm time={time}/>}
-      {type === 'thirdDeliveryForm' && <ThirdPickUpForm time={time}/>}
+      {type === 'thirdDeliveryForm' && <ThirdDeliveryForm time={time}/>}
     </div>
   )
 }

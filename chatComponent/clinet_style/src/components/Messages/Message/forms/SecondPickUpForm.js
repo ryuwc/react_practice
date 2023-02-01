@@ -1,6 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import {useRecoilState} from "recoil";
-import {giftCardState, paymenAmountState, sendUserPhoneState, sendUserState} from "../../../../state/chat";
+import {
+  giftCardState,
+  isErrorModalShowState,
+  paymenAmountState,
+  sendUserPhoneState,
+  sendUserState
+} from "../../../../state/chat";
 import {ThirdPickUpFormSendMessage} from "../../../../util/chat";
 import {
   ErrorMessage,
@@ -12,12 +18,16 @@ import {
   TextInput
 } from "./SecondDeliveryFormStyle";
 import useInputValidate from "../../../../hooks/use-inputValidate";
+import {Modal} from "./errorModal/ErrorModalStyle";
+import ErrorModal from "./errorModal/ErrorModal";
 
 function SecondPickUpForm({time}) {
   const [sendUser, setSendUser] = useRecoilState(sendUserState);
   const [sendUserPhone, setSendUserPhone] = useRecoilState(sendUserPhoneState);
   const [giftCard, setGiftCard] = useRecoilState(giftCardState);
   const [paymentAmount, setPaymentAmount] = useRecoilState(paymenAmountState);
+
+  const [isErrorModalShow, setIsErrorModalShow] = useRecoilState(isErrorModalShowState);
 
   const phoneValidate = (target) => {
     target.value = target.value
@@ -66,6 +76,7 @@ function SecondPickUpForm({time}) {
       console.log(data);
       if (!isNotEmpty(data.value)) {
         data.toggleError();
+        setIsErrorModalShow(true);
         return;
       }
     }
