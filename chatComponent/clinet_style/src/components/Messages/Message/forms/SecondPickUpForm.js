@@ -18,8 +18,6 @@ import {
   TextInput
 } from "./SecondDeliveryFormStyle";
 import useInputValidate from "../../../../hooks/use-inputValidate";
-import {Modal} from "./errorModal/ErrorModalStyle";
-import ErrorModal from "./errorModal/ErrorModal";
 
 function SecondPickUpForm({time}) {
   const [sendUser, setSendUser] = useRecoilState(sendUserState);
